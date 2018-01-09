@@ -1,4 +1,3 @@
 @echo off
-:loop
+..\MedBot.bat
 node bot.js
-goto :loop
