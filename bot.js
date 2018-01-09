@@ -23,34 +23,65 @@ var roleUnswElder = '';
 var collegeA = '';
 var collegeB = '';
 var collegeC = '';
-var collegeD = ''; 
+var collegeD = '';
 var role_1 = '';
 var role_2 = '';
 var fun_GameNights = '';
 var fun_Minecraft = '';
-
 var token;
+var welcomeID = '400133865487990804';
+
+var numbers = ["0⃣", "1⃣", "2⃣", "3⃣", "4⃣", "5⃣", "6⃣", "7⃣", "8⃣", "9⃣"];
+var reactA = '🇦';
+
+var welcomeMsg = `
+__** Welcome To UNSW Medicine Discord **__
+Play games, ask questions or get a little study done ;)
+Please select the roles appropriate for you...
+
+*UNSW Med Stduents*:
+ ${numbers[1]} - 1st Years
+ ${numbers[2]} - 2nd Years
+ ${reactA} - College A
+ ${reactB} - College B
+ ${reactC} - College C
+ ${reactD} - College D
+ 
+`
+
 client.on('ready', () => {
     client.user.setGame("Welcome to UNSW Medicine");
     console.log(`Logged in as ${client.user.tag}!`);
+
+    roleMedicine = client.guilds.get(guildID).roles.find('name', 'Medicine').id;
+    roleMedButNotUnsw = client.guilds.get(guildID).roles.find('name', 'MedbutnotUNSW').id;
+    roleJustJoined = client.guilds.get(guildID).roles.find('name', 'New User').id;
+    roleUnswElder = client.guilds.get(guildID).roles.find('name', 'Phase 2 & 3').id;
+    collegeA = client.guilds.get(guildID).roles.find('name', 'College A').id;
+    collegeB = client.guilds.get(guildID).roles.find('name', 'College B').id;
+    collegeC = client.guilds.get(guildID).roles.find('name', 'College C').id;
+    collegeD = client.guilds.get(guildID).roles.find('name', 'College D').id;
+    role_1 = client.guilds.get(guildID).roles.find('name', '1st Year').id;
+    role_2 = client.guilds.get(guildID).roles.find('name', '2nd Year').id;
+    fun_GameNights = client.guilds.get(guildID).roles.find('name', 'gamenights').id;
+    
     /*
-            welcomeChannel = msg.channel.id;
-            guildID = msg.guild.id;
-            storedGuild = msg.guild;
-            console.log(devUser.username);
-            roles = msg.guild.roles.array();
-            //console.log(roles);
-            for (var i = 0; i < roles.length; i++) {
-                if (roles[i].name === rolePendingName) {
-                    rolePending = roles[i].id;
+        client.guilds.get('237582214525616129').channels.get('389198025530015754').fetchMessages({limit: 10}).then(
+        messages => {
+            messages.map(function(obj) {
+                if(obj.content.substring(0, 9) === welcomeText.substring(1,10) && obj.author.id === myID)
+                {
+                    client.guilds.get('237582214525616129').channels.get('389198025530015754').fetchMessage(obj.id).then(
+                        msg => {
+                            msg.delete();
+                        }
+                    ).catch(console.error)
                 }
-                if (roles[i].name === roleAcceptName) {
-                    roleAccept = roles[i].id;
-                }
-            }
-            msg.delete();
-            msg.channel.send("Starting Welcome Log");
+            })
+        }
+    ).catch(console.error);
     */
+
 });
 
 var pongCount = 0;
@@ -66,26 +97,26 @@ client.on('message', msg => {
         }
         if (msg.content === '!ping') {
             pongCount = 0;
-        }        
+        }
     }
     if (msg.content === "!avatar") {
         if (msg.author.avatarURL === null || undefined) {
-            msg.reply("You do not have an avatar!")
+            msg.reply("You do not have an avatar!");
         }
         else {
-            msg.reply(msg.author.avatarURL)
+            msg.reply(msg.author.avatarURL);
+        }
+    }
+    if (msg.content === '!ping') {
+        pongCount++;
+        if (pongCount < 3) {
+            msg.reply('Pong!');
         }
     }
     if (msg.content === "!dates") {
         msg.reply("Here are some key dates");
         msg.reply("https://cdn.discordapp.com/attachments/399907273310208001/400135192062459905/unknown.png");
     }
-    if (msg.content === '!ping') {
-        pongCount++;
-        if (pongCount < 3) {
-            msg.reply('Pong!')
-        }
-    }    
     if (msg.author.id === myID) {
         if (shutdown) {
             process.exit();
@@ -122,8 +153,8 @@ client.on('message', msg => {
 
 
 client.on('guildMemberAdd', member => {
-    
-})
+
+});
 
 /*
 client.on('guildMemberAdd', member => {
@@ -151,4 +182,4 @@ client.on('guildMemberAdd', member => {
     }
 });
 */
-client.login("NDAwMDc1NDMwMTU5NDUwMTE4.DTYTRg.s8DrhHH7Bl5pLh0MRfdLbUbkbSk");
+client.login(process.env.BOT_TOKEN);
