@@ -76,6 +76,10 @@ client.on('message', msg => {
             msg.reply(msg.author.avatarURL)
         }
     }
+    if (msg.content === "!dates") {
+        msg.reply("Here are some key dates");
+        msg.reply("https://cdn.discordapp.com/attachments/399907273310208001/400135192062459905/unknown.png");
+    }
     if (msg.content === '!ping') {
         pongCount++;
         if (pongCount < 3) {
@@ -147,4 +151,4 @@ client.on('guildMemberAdd', member => {
     }
 });
 */
-client.login(process.env.BOT_TOKEN);
+client.login("NDAwMDc1NDMwMTU5NDUwMTE4.DTYTRg.s8DrhHH7Bl5pLh0MRfdLbUbkbSk");
