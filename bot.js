@@ -68,6 +68,14 @@ client.on('message', msg => {
             pongCount = 0;
         }        
     }
+    if (msg.content === "!avatar") {
+        if (msg.author.avatarURL === null || undefined) {
+            msg.reply("You do not have an avatar!")
+        }
+        else {
+            msg.reply(msg.author.avatarURL)
+        }
+    }
     if (msg.content === '!ping') {
         pongCount++;
         if (pongCount < 3) {
@@ -107,6 +115,7 @@ client.on('message', msg => {
         }
     }
 });
+
 
 client.on('guildMemberAdd', member => {
     
