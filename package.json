@@ -1,0 +1,22 @@
+{
+  "name": "medbot",
+  "version": "1.0.0",
+  "description": "A discord.js bot written for the UNSW Medicine Discord",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Monacraft/MedBot.git"
+  },
+  "author": "Monacraft",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Monacraft/MedBot/issues"
+  },
+  "homepage": "https://github.com/Monacraft/MedBot#readme",
+  "dependencies": {
+    "discord.js": "^11.2.1"
+  }
+}
