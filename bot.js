@@ -33,21 +33,55 @@ var welcomeID = '400133865487990804';
 
 var numbers = ["0⃣", "1⃣", "2⃣", "3⃣", "4⃣", "5⃣", "6⃣", "7⃣", "8⃣", "9⃣"];
 var reactA = '🇦';
+var reactB = '🇧';
+var reactC = '🇨';
+var reactD = '🇩';
 
-var welcomeMsg = `
-__** Welcome To UNSW Medicine Discord **__
+var plus = '➕';
+var hospital = '🏥';
+var ok = '👌';
+var dice = '🎲';
+
+var welcome = [`
+__** \`Welcome To UNSW Medicine Discord\` **__
 Play games, ask questions or get a little study done ;)
-Please select the roles appropriate for you...
 
-*UNSW Med Stduents*:
- ${numbers[1]} - 1st Years
- ${numbers[2]} - 2nd Years
- ${reactA} - College A
- ${reactB} - College B
- ${reactC} - College C
- ${reactD} - College D
- 
-`
+
+Before that, why don't you fill me in on who you are:
+
+   ${numbers[1]} - 1st Year UNSW Med Student
+   ${numbers[2]} - 2nd Year UNSW Med Student
+   ${plus}       - Phase 2/3 UNSW Med Student
+   ${hospital}   - Meidicine but not at UNSW
+   ${ok}         - I don't do medicine, but thanks for asking
+
+Select one please:
+ `, `
+ What College are you in?
+ (If you haven't found out, react to this whenever you do)
+
+   ${reactA} - College A
+   ${reactB} - College B
+   ${reactC} - College C
+   ${reactD} - College D
+
+Select one please:
+`, `
+Ok!
+Finally, would you like to be tagged for game nights?
+These are occasional online events we hold like poker, .io games, minecraft and more
+
+React ${dice} if you would like to notified for them.
+`, `
+Hope you enjoy your stay !!!
+Here are my commands:
+\`\`\` - m!help                     These Commands :P
+ - m!avatar [username]        Send's that persons profile pic
+ - m!dates                    Academic Calendar for UNSW Med
+
+Bot made by Jash. These commands were implemented by Preetham.
+\`\`\`
+`];
 
 client.on('ready', () => {
     client.user.setGame("Welcome to UNSW Medicine");
@@ -55,7 +89,7 @@ client.on('ready', () => {
 
     roleMedicine = client.guilds.get(guildID).roles.find('name', 'Medicine').id;
     roleMedButNotUnsw = client.guilds.get(guildID).roles.find('name', 'MedbutnotUNSW').id;
-    roleJustJoined = client.guilds.get(guildID).roles.find('name', 'New User').id;
+    roleNotMed= client.guilds.get(guildID).roles.find('name', 'Normies').id;
     roleUnswElder = client.guilds.get(guildID).roles.find('name', 'Phase 2 & 3').id;
     collegeA = client.guilds.get(guildID).roles.find('name', 'College A').id;
     collegeB = client.guilds.get(guildID).roles.find('name', 'College B').id;
@@ -64,24 +98,6 @@ client.on('ready', () => {
     role_1 = client.guilds.get(guildID).roles.find('name', '1st Year').id;
     role_2 = client.guilds.get(guildID).roles.find('name', '2nd Year').id;
     fun_GameNights = client.guilds.get(guildID).roles.find('name', 'gamenights').id;
-    
-    /*
-        client.guilds.get('237582214525616129').channels.get('389198025530015754').fetchMessages({limit: 10}).then(
-        messages => {
-            messages.map(function(obj) {
-                if(obj.content.substring(0, 9) === welcomeText.substring(1,10) && obj.author.id === myID)
-                {
-                    client.guilds.get('237582214525616129').channels.get('389198025530015754').fetchMessage(obj.id).then(
-                        msg => {
-                            msg.delete();
-                        }
-                    ).catch(console.error)
-                }
-            })
-        }
-    ).catch(console.error);
-    */
-
 });
 
 var pongCount = 0;
@@ -89,17 +105,11 @@ client.on('message', msg => {
     if (msg.author.id === devID) {
         // This ID is set to Monacraft's ID
         // Dev Commands
-        if (msg.content === '!shutdown') {
-            if (msg.author.id === devID) {
-                shutdown = true;
-                msg.reply("Goodbye :')");
-            }
-        }
-        if (msg.content === '!ping') {
+        if (msg.content === 'm!ping') {
             pongCount = 0;
         }
     }
-    if (msg.content === "!avatar") {
+    if (msg.content === "m!avatar") {
         if (msg.author.avatarURL === null || undefined) {
             msg.reply("You do not have an avatar!");
         }
@@ -107,79 +117,126 @@ client.on('message', msg => {
             msg.reply(msg.author.avatarURL);
         }
     }
-    if (msg.content === '!ping') {
+    if (msg.content === 'm!ping') {
         pongCount++;
         if (pongCount < 3) {
             msg.reply('Pong!');
         }
     }
-    if (msg.content === "!dates") {
-        msg.reply("Here are some key dates");
-        msg.reply("https://cdn.discordapp.com/attachments/399907273310208001/400135192062459905/unknown.png");
+    if (msg.content === "m!dates") {
+        msg.reply("Key Dates: https://cdn.discordapp.com/attachments/399907273310208001/400135192062459905/unknown.png");
     }
     if (msg.author.id === myID) {
         if (shutdown) {
             process.exit();
         }
     }
+    if (msg.content === "m!test") {
+        client.channels.get("400109523118850078").send("⭐ Hello " + msg.author + " and Welcome to the UNSW Medicine Discord!");
+        msg.author.send(welcome[0]).then(message => {
+            message.react(numbers[1]);
+            message.react(numbers[2]);
+            message.react(plus);
+            message.react(hospital);
+            message.react(ok);
+        });
+    }
     if (msg.channel.type === "dm") {
-        var exec = false;
         if (msg.author.id !== myID) {
-            /*
-            if (msg.content === acceptText) {
-                exec = true;
-                for (var a = 0; a < notAccepted.length; a++) {
-                    //console.log(r.id + " : " + notAccepted[a]);
-                    if (msg.author.id === notAccepted[a]) {
-                        //var m = react.message.guild.members.get(r[u].id);
-                        client.guilds.get(guildID).fetchMember(msg.author.id).then(member => {
-                            member.removeRole(rolePending);
-                            console.log(member.user.username + " accepted conditions");
-                            member.addRole(roleAccept);
-                            acceptedCount++;
-                            msg.author.send(acceptMsg);
-                        });
-                        notAccepted.splice(a, 1);
-                    }
-                }
-            } else {
-                if (!exec) {
-                    msg.author.send(failMsg);
-                }
-            }*/
+
         }
     }
 });
 
-
-client.on('guildMemberAdd', member => {
-
-});
-
-/*
-client.on('guildMemberAdd', member => {
-    if (member.guild.id === guildID) {
-        if (started === 1) {
-            console.log('Welcoming... ' + member.user.username + " with ID: " + member.user.id);
-
-            var guild = client.guilds.get(guildID);
-            var thisChannel = guild.channels.get(welcomeChannel);
-
-            member.addRole(rolePending);
-            notAccepted.push(member.user.id);
-            console.log("Not Accepted Count: " + notAccepted.length);
-
-            setTimeout(autoKick, 60000 * 60 * 24, member.user.id);
-
-            thisChannel.send(`⭐ Hello ${member.user} and welcome to the Medical Knowledge Association!`);
-            thisChannel.send("Welcome Log");
-
-            member.user.send(dmText);
-
-        } else {
-            console.log('Someone joined but I was not started: ' + member.user.username + " : " + member.user.id);
+client.on('messageReactionAdd', (react, user) => {
+    if (user.id !== myID) {
+        if (react.message.content.substring(0,19) === welcome[0].substring(1, 20)) {
+            var med = false;
+            if (react.emoji.name === numbers[1]) {
+                client.guilds.get(guildID).members.get(user.id).addRole(role_1);
+                client.guilds.get(guildID).members.get(user.id).addRole(roleMedicine);
+                med = true;
+            }
+            if (react.emoji.name === numbers[2]) {
+                client.guilds.get(guildID).members.get(user.id).addRole(role_2);
+                client.guilds.get(guildID).members.get(user.id).addRole(roleMedicine);
+                med = true;
+                console.log('Yes');
+            }
+            if (react.emoji.name === hospital) {
+                client.guilds.get(guildID).members.get(user.id).addRole(roleMedButNotUnsw);
+                client.guilds.get(guildID).members.get(user.id).addRole(roleMedicine);
+            }
+            if (react.emoji.name === plus) {
+                client.guilds.get(guildID).members.get(user.id).addRole(roleUnswElder);
+                client.guilds.get(guildID).members.get(user.id).addRole(roleMedicine);
+                med = true;
+            }
+            if (react.emoji.name === ok) {
+                react.message.delete();                
+                client.guilds.get(guildID).members.get(user.id).addRole(roleNotMed);
+            }
+            if (med) {
+                react.message.delete();                
+                react.message.channel.send(welcome[1]).then(sentMessage => {
+                    sentMessage.react(reactA);
+                    sentMessage.react(reactB);
+                    sentMessage.react(reactC);
+                    sentMessage.react(reactD);
+                });
+            }
+            react.message.channel.send(welcome[2]).then(sentMessage => {
+                sentMessage.react(dice);
+            });
+            react.message.channel.send(welcome[3]);
         }
+        if (react.message.content.substring(0,19) === welcome[1].substring(1, 20)) {
+            var college = false;
+            if(react.emoji.name === reactA)
+            {
+                client.guilds.get(guildID).members.get(user.id).addRole(collegeA);
+                college = true;
+            }
+            if(react.emoji.name === reactB)
+            {
+                client.guilds.get(guildID).members.get(user.id).addRole(collegeB);
+                college = true;
+            }
+            if(react.emoji.name === reactC)
+            {
+                client.guilds.get(guildID).members.get(user.id).addRole(collegeC);
+                college = true;
+            }
+            if(react.emoji.name === reactD)
+            {
+                client.guilds.get(guildID).members.get(user.id).addRole(collegeD);
+                college = true;
+            }
+            if(college)
+            {
+                react.message.delete();
+            }                                    
+        }
+        if (react.message.content.substring(0,19) === welcome[2].substring(1, 20)) {
+            if(react.emoji.name === dice)
+            {
+                client.guilds.get(guildID).members.get(user.id).addRole(fun_GameNights);
+                react.message.delete();
+            }
+        }  
     }
+})
+
+client.on('guildMemberAdd', member => {
+    client.channels.get("400109523118850078").send("⭐ Hello " + member.user + " and Welcome to the UNSW Medicine Discord!");
+    member.user.send(welcome[0]).then(message => {
+        message.react(numbers[1]);
+        message.react(numbers[2]);
+        message.react(plus);
+        message.react(hospital);
+        message.react(ok);
+        client.guilds.get(guildID).members.find()
+    });
 });
-*/
+
 client.login(process.env.BOT_TOKEN);
