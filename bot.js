@@ -52,7 +52,7 @@ Before that, why don't you fill me in on who you are:
    ${numbers[1]}  - 1st Year UNSW Med Student
    ${numbers[2]}  - 2nd Year UNSW Med Student
    ${plus}  - Phase 2/3 UNSW Med Student
-   ${hospital}  - Meidicine but not at UNSW
+   ${hospital}  - Medicine but not at UNSW
    ${ok}  - I don't do medicine, but thanks for asking
 
 Select one please (Step 1 of 3):
@@ -74,7 +74,7 @@ These are occasional online events we hold like poker, .io games, minecraft and 
 React ${dice} if you would like to notified for them.
 Otherwise react ${fail} (Step 2 of 3)
 `, `
-Hope you enjoy your stay !!!
+Hope you enjoy your stay!
 Here are my commands:
 \`\`\` - m!help                     These Commands :P
  - m!avatar [username]        Send's that persons profile pic
@@ -195,6 +195,11 @@ client.on('messageReactionAdd', (react, user) => {
             if (react.emoji.name === hospital) {
                 client.guilds.get(guildID).members.get(user.id).addRole(roleMedButNotUnsw);
                 client.guilds.get(guildID).members.get(user.id).addRole(roleMedicine);
+                client.guilds.get(guildID).members.get(user.id).addRole(roleNotMed);
+                react.message.channel.send(welcome[2]).then(sentMessage => {
+                    sentMessage.react(dice);
+                    sentMessage.react(fail);
+                });                
             }
             if (react.emoji.name === plus) {
                 client.guilds.get(guildID).members.get(user.id).addRole(roleUnswElder);
