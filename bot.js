@@ -159,7 +159,7 @@ client.on('message', msg => {
         }
     }
     if (msg.content.toLowerCase() === "uwu") {
-     msg.channel.send("", { file: ban[bancount] });
+     msg.channel.send("", { file: "https://cdn.discordapp.com/attachments/285215702774972427/485404754382553098/40591901_10155708527450869_8535339261245784064_n.jpg" });
     }
     if (msg.content === "m!test") {
         client.channels.get("400109523118850078").send("⭐ Hello " + msg.author + " and Welcome to the UNSW Medicine Discord!");
