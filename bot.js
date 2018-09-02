@@ -158,6 +158,9 @@ client.on('message', msg => {
             process.exit();
         }
     }
+    if (msg.content.toLowerCase() === "uwu") {
+     msg.channel.send("", { file: ban[bancount] });
+    }
     if (msg.content === "m!test") {
         client.channels.get("400109523118850078").send("⭐ Hello " + msg.author + " and Welcome to the UNSW Medicine Discord!");
         msg.author.send("For the following messages, react options will appear one-by-one and possibly out of order: ").then(
