@@ -46,8 +46,9 @@ Before that, why don't you fill me in on who you are:
    ${numbers[1]}  - 1st Year UNSW Med Student
    ${numbers[2]}  - 2nd Year UNSW Med Student
    ${numbers[3]}  - 3rd Year UNSW Med Student
-   ${numbers[4]}  - 3rd Year UNSW Med Student
-   ${plus}  - Phase 3 UNSW Med Student
+   ${numbers[4]}  - 4th Year UNSW Med Student
+   ${numbers[5]}  - 5th Year UNSW Med Student
+   ${numbers[6]}  - 6th Year UNSW Med Student
    ${hospital}  - Medicine but not at UNSW
    ${ok}  - I don't do medicine, but thanks for asking
 
@@ -176,12 +177,22 @@ medBot.on('message', msg => {
         medBot.channels.get("400133865487990804").send("⭐ Hello " + msg.author + " and Welcome to the UNSW Medicine Discord!");
         msg.author.send("For the following messages, react options will appear one-by-one and possibly out of order: ").then(
             msg.author.send(welcome[0]).then(message => {
-                message.react(numbers[1]);
-                message.react(numbers[2]);
-                message.react(numbers[3]);
-                message.react(plus);
-                message.react(hospital);
-                message.react(ok);
+                message.react(numbers[1]).then(message => {
+                    message.react(numbers[2]).then(message => {
+                        message.react(numbers[3]).then(message => {
+                            message.react(numbers[4]).then(message => {
+                                message.react(numbers[5]).then(message => {
+                                    message.react(numbers[6]).then(message => {
+                                        message.react(hospital).then(message => {
+                                            message.react(ok)
+                                        })
+                                    })
+                                    
+                                })
+                            })
+                        })
+                    })
+                })
             })
         );
     }
@@ -301,4 +312,4 @@ medBot.on('guildMemberAdd', member => {
     }
 });
 
-medBot.login(process.env.MED_TOKEN);
+medBot.login(process.env.BOT_TOKEN);
