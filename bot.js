@@ -177,22 +177,14 @@ medBot.on('message', msg => {
         medBot.channels.get("400133865487990804").send("⭐ Hello " + msg.author + " and Welcome to the UNSW Medicine Discord!");
         msg.author.send("For the following messages, react options will appear one-by-one and possibly out of order: ").then(
             msg.author.send(welcome[0]).then(message => {
-                message.react(numbers[1]).then(message => {
-                    message.react(numbers[2]).then(message => {
-                        message.react(numbers[3]).then(message => {
-                            message.react(numbers[4]).then(message => {
-                                message.react(numbers[5]).then(message => {
-                                    message.react(numbers[6]).then(message => {
-                                        message.react(hospital).then(message => {
-                                            message.react(ok)
-                                        })
-                                    })
-                                    
-                                })
-                            })
-                        })
-                    })
-                })
+                message.react(numbers[1]);
+                message.react(numbers[2]);
+                message.react(numbers[3]);
+                message.react(numbers[4]);
+                message.react(numbers[5]);
+                message.react(numbers[6]);
+                message.react(hospital);
+                message.react(ok);
             })
         );
     }
