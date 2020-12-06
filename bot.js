@@ -275,33 +275,31 @@ medBot.on('messageReactionAdd', (react, user) => {
 });
 
 medBot.on('guildMemberAdd', member => {
-    if (member.guild.id === guildID) {
-        medBot.guilds.get(guildID).channels.get(welcomeID).fetchMessages({ limit: 4 }).then(
-            messages => {
-                messages.map(function (obj) {
-                    if (obj.content.substring(0, 9) === welcome[4].substring(1, 10) && obj.author.id === myID) {
-                        medBot.guilds.get(guildID).channels.get(welcomeID).fetchMessage(obj.id).then(
-                            msg => {
-                                msg.delete();
-                            }
-                        ).catch(console.error)
-                    }
-                });
-            });
-        medBot.channels.get(welcomeID).send("⭐ Hello " + member.user + " and Welcome to the UNSW Medicine Discord!").then(message => {
-            medBot.channels.get(welcomeID).send(welcome[4]);
-        });
-        member.user.send("For the following messages, react options will appear one-by-one and possibly out of order: ").then(
-            member.user.send(welcome[0]).then(message => {
-                message.react(numbers[1]);
-                message.react(numbers[2]);
-                message.react(numbers[3]);
-                message.react(plus);
-                message.react(hospital);
-                message.react(ok);
-            })
-        );
-    }
+     medBot.guilds.get(guildID).channels.get(welcomeID).fetchMessages({ limit: 4 }).then(
+         messages => {
+             messages.map(function (obj) {
+                 if (obj.content.substring(0, 9) === welcome[4].substring(1, 10) && obj.author.id === myID) {
+                     medBot.guilds.get(guildID).channels.get(welcomeID).fetchMessage(obj.id).then(
+                         msg => {
+                             msg.delete();
+                         }
+                     ).catch(console.error)
+                 }
+             });
+         });
+     medBot.channels.get(welcomeID).send("⭐ Hello " + member.user + " and Welcome to the UNSW Medicine Discord!").then(message => {
+         medBot.channels.get(welcomeID).send(welcome[4]);
+     });
+     member.user.send("For the following messages, react options will appear one-by-one and possibly out of order: ").then(
+         member.user.send(welcome[0]).then(message => {
+             message.react(numbers[1]);
+             message.react(numbers[2]);
+             message.react(numbers[3]);
+             message.react(plus);
+             message.react(hospital);
+             message.react(ok);
+         })
+     );
 });
 
 medBot.login(process.env.BOT_TOKEN);
