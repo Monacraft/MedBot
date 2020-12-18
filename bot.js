@@ -148,7 +148,10 @@ medBot.on('message', msg => {
     }
     if (msg.content.toLowerCase() === "uwu") {
      msg.channel.send(" ", { file: "https://cdn.discordapp.com/attachments/285215702774972427/485404754382553098/40591901_10155708527450869_8535339261245784064_n.jpg" });
-   }
+    }
+    if (msg.content.toLowerCase() === "savage") {
+     msg.channel.send(" ", { file: "https://media.discordapp.net/attachments/375868257846165506/789464462658109460/unknown.png" });
+    }
     if (msg.author.id === myID) {
         if (shutdown) {
             process.exit();
