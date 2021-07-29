@@ -178,7 +178,7 @@ medBot.on('message', msg => {
     }
     if (msg.content === "m!test") {
         //medBot.channels.get("400133865487990804").send("⭐ Hello " + msg.author + " and Welcome to the UNSW Medicine Discord!");
-        msg.author.send("For the following messages, react options will appear one-by-one and possibly out of order: ").then(
+        msg.author.send("Please react for the appropriate roles: ").then(
             msg.author.send(welcome[0]).then(async function (message) {
                 await message.react(numbers[1]);
                 await message.react(numbers[2]);
@@ -293,7 +293,7 @@ medBot.on('guildMemberAdd', member => {
      medBot.channels.get(welcomeID).send("⭐ Hello " + member.user + " and Welcome to the UNSW Medicine Discord!").then(message => {
          medBot.channels.get(welcomeID).send(welcome[4]);
      });
-     member.user.send("For the following messages, react options will appear one-by-one and possibly out of order: ").then(
+     member.user.send("Please react for the appropriate roles:").then(
         msg.author.send(welcome[0]).then(async function (message) {
             await message.react(numbers[1]);
             await message.react(numbers[2]);
