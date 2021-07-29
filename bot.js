@@ -177,17 +177,17 @@ medBot.on('message', msg => {
         }
     }
     if (msg.content === "m!test") {
-        medBot.channels.get("400133865487990804").send("⭐ Hello " + msg.author + " and Welcome to the UNSW Medicine Discord!");
+        //medBot.channels.get("400133865487990804").send("⭐ Hello " + msg.author + " and Welcome to the UNSW Medicine Discord!");
         msg.author.send("For the following messages, react options will appear one-by-one and possibly out of order: ").then(
-            msg.author.send(welcome[0]).then(message => {
-                message.react(numbers[1]);
-                message.react(numbers[2]);
-                message.react(numbers[3]);
-                message.react(numbers[4]);
-                message.react(numbers[5]);
-                message.react(numbers[6]);
-                message.react(hospital);
-                message.react(ok);
+            msg.author.send(welcome[0]).then(async function (message) {
+                await message.react(numbers[1]);
+                await message.react(numbers[2]);
+                await message.react(numbers[3]);
+                await message.react(numbers[4]);
+                await message.react(numbers[5]);
+                await message.react(numbers[6]);
+                await message.react(hospital);
+                await message.react(ok);
             })
         );
     }
@@ -294,14 +294,16 @@ medBot.on('guildMemberAdd', member => {
          medBot.channels.get(welcomeID).send(welcome[4]);
      });
      member.user.send("For the following messages, react options will appear one-by-one and possibly out of order: ").then(
-         member.user.send(welcome[0]).then(message => {
-             message.react(numbers[1]);
-             message.react(numbers[2]);
-             message.react(numbers[3]);
-             message.react(plus);
-             message.react(hospital);
-             message.react(ok);
-         })
+        msg.author.send(welcome[0]).then(async function (message) {
+            await message.react(numbers[1]);
+            await message.react(numbers[2]);
+            await message.react(numbers[3]);
+            await message.react(numbers[4]);
+            await message.react(numbers[5]);
+            await message.react(numbers[6]);
+            await message.react(hospital);
+            await message.react(ok);
+        })
      );
 });
 
